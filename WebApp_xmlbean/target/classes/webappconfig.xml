@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-3.0.xsd
+    http://www.springframework.org/schema/aop
+    http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+    ">
+    
+    <!--Below code is dependency for sping jdbc module that helps create connection to JDBC and database  -->
+    <!-- https://stackoverflow.com/questions/12657503/how-to-define-a-mysql-datasource-bean-via-xml-in-spring -->
+    <bean name="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+    <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+    <property name="url" value="jdbc:mysql://localhost:3306/cubic" />
+    <property name="username" value="root" />
+    <property name="password" value="root" />
+    <!-- update the names of  driverclassname, url, un and pw as per facts-->
+	</bean>
+	
+	<!--  Also need jdbc template to perform operations after the connection has been made-->
+	<!-- once connection has been estd, jdbc template is created using reference to datasource -->
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+    <property name="dataSource" ref="dataSource"/>
+	</bean>
+ </beans>
